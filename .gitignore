@@ -4,3 +4,5 @@ gradlew*
 gradle/
 build/*
 target/*
+/bin/
+/build/
