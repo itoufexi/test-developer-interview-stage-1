@@ -14,20 +14,21 @@ public class SearchUser extends ScenarioSteps {
 
     MainSearchPage mainSearchPage;
 
-    String searchText = "craft";
+    private static final String SEARCHTEXT = "craft";
+    private static final String ALL_CATEGORIES = "All categories";
 
     @Step
     public void search_from_input_box() {
-        mainSearchPage.searchFromInputBox(searchText);
+        mainSearchPage.searchFromInputBox(SEARCHTEXT);
     }
 
     @Step
-    public void verify_result_for_top_categories() {
-        assertThat(mainSearchPage.getTopCategoriesHeader(), containsString(searchText));
+    public void verify_result_for_all_categories_link() {
+        assertThat(mainSearchPage.getAllCategoriesLinkText(), containsString(ALL_CATEGORIES));
     }
 
     @Step
-    public void verify_result_for_all_categories() {
-        assertThat(mainSearchPage.getAllCategoriesHeader(), containsString(searchText));
+    public void verify_result_for_custom_link() {
+        assertThat(mainSearchPage.getCustomLinkText(), containsString(SEARCHTEXT));
     }
 }

@@ -1,6 +1,5 @@
 package com.db.am.bauhaus.project.pages;
 
-import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
@@ -16,8 +15,14 @@ public class MainSearchPage extends PageObject {
     @FindBy(id = "search-query")
     WebElementFacade inputBox;
 
-    @FindBy(css = ".btn.btn-orange.btn-append")
+    @FindBy(css = ".btn.btn-primary")
     WebElementFacade searchButton;
+    
+    @FindBy(css = ".text-smaller.text-link-secondary>span")
+    WebElementFacade allCategoriesLink;
+    
+    @FindBy(css = ".display-inline.text-smaller")
+    WebElementFacade customLink;
 
     public MainSearchPage(WebDriver driver) {
         super(driver);
@@ -28,11 +33,11 @@ public class MainSearchPage extends PageObject {
         searchButton.click();
     }
 
-    public String getTopCategoriesHeader() {
-        return find(By.cssSelector("h4.pb-xs-1-5")).getText();
+    public String getAllCategoriesLinkText() {
+    	return allCategoriesLink.getText();
     }
 
-    public String getAllCategoriesHeader() {
-        return find(By.cssSelector("h1.conform-heading.display-inline")).getText();
+    public String getCustomLinkText() {
+    	return customLink.getText();
     }
 }

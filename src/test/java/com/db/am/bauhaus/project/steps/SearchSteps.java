@@ -58,16 +58,16 @@ public class SearchSteps {
 
     @Then("^the result should be displayed$")
     public void verify_search_result() {
-        user.verify_result_for_top_categories();
-        user.verify_result_for_all_categories();
+        user.verify_result_for_all_categories_link();
+        user.verify_result_for_custom_link();
     }
 
     @Then("^the result should be displayed \\(screenplay\\)$")
     public void verify_search_result_screenplay() {
         String searchText = Serenity.sessionVariableCalled(SessionVar.SEARCH_TEXT).toString();
         theActorInTheSpotlight().should(
-                seeThat("the top categories header ", the(SearchTarget.TOP_CATEGORIES_HEADER), containsText(searchText)),
-                seeThat("the all categories header ", the(SearchTarget.ALL_CATEGORIES_HEADER), containsText(searchText))
-        );
+                seeThat("the top categories link ", the(SearchTarget.ALL_CATEGORIES_LINK), containsText("All categories")),
+                seeThat("the custom link ", the(SearchTarget.CUSTOM_LINK), containsText(searchText))
+        		);
     }
 }
