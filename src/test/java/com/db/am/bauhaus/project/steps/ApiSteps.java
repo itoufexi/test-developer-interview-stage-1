@@ -1,47 +1,42 @@
 package com.db.am.bauhaus.project.steps;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
+import com.db.am.bauhaus.project.steplib.ApiUser;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import net.thucydides.core.annotations.Steps;
 
 
 public class ApiSteps {
 
-    private static final String ENDPOINT = "https://openapi.etsy.com/v2/listings/active";
-	
-	private Response response;
-	private RequestSpecification request;
+    @Steps
+    ApiUser apiUser;
 
     @Given("an API user uses no API key")
     public void a_user_uses_no_api_key() {
-        request = given().when();
+    	apiUser.create_a_request_with_no_api_key();
     }
     
     @Given("an API user uses the invalid API key (.*)$")
     public void a_user_uses_invalid_api_key(String key) {
-        request = given().queryParam("api_key", key).when();
+        apiUser.create_a_request_with_an_invalid_api_key(key);
     }
     
-	@When("they call the endpoint")
-	public void a_user_retrieves_the_book_by_isbn(){
-		response = request.get(ENDPOINT);
-		System.out.println("response: " + response.prettyPrint());
+	@When("they call the Etsy openapi endpoint")
+	public void a_user_calls_the_openapi_endpoint(){
+		apiUser.call_openapi_endpoint();
 	}
 	
 	@Then("the response message is '(.*)'$")
 	public void verify_response_body(String message) {
-		response.then().body(equalTo(message));
+		apiUser.verify_response_body(message);
 	}
 
 	@And("the status code is (\\d+)")
 	public void verify_status_code(int statusCode) {
-		response.then().statusCode(statusCode);
+		apiUser.verify_status_code(statusCode);
 	}
 
 }
