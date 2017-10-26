@@ -50,6 +50,11 @@ public class SearchSteps {
     public void search_from_input_box() {
         user.search_from_input_box();
     }
+    
+    @When("^he searches for '(.*)' under '(.*)' from the dropdown$")
+    public void search_from_dropdown(String subCategory, String category) {
+        user.search_from_dropdown(category, subCategory);
+    }
 
     @When("^he searches for a product from the input box \\(screenplay\\)$")
     public void search_from_input_box_screenplay() {
@@ -60,6 +65,11 @@ public class SearchSteps {
     public void verify_search_result() {
         user.verify_result_for_all_categories_link();
         user.verify_result_for_custom_link();
+    }
+    
+    @Then("^the page for '(.*)' should be displayed$")
+    public void verify_category_page(String title) {
+        user.verify_result_for_title(title);
     }
 
     @Then("^the result should be displayed \\(screenplay\\)$")
