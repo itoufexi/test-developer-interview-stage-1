@@ -1,3 +1,12 @@
+# Updates
+
+Work done:
+
+1. Updated Gradle dependencies
+2. Fixed first 2 scenarios
+3. Refactored some parts
+4. Implemented wip and added some more scenarios
+
 # Introduction
 The goal is to test www.etsy.com using the template provided on https://github.com/soap6gal/test-developer-interview-stage-1. 
  
