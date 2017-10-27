@@ -10,12 +10,14 @@ import net.thucydides.core.annotations.Step;
 public class ApiUser {
 
     private static final String OPENAPI_ENDPOINT = "https://openapi.etsy.com/v2/listings/active";
+
+	private static final String HOMEPAGE_ENDPOINT = "https://www.etsy.com/";
 	
 	private Response response;
 	private RequestSpecification request;
 	
 	@Step
-	public void create_a_request_with_no_api_key() {
+	public void create_a_request() {
 		request = given().when();
 	}
 	
@@ -30,6 +32,11 @@ public class ApiUser {
 	}
 	
 	@Step
+	public void call_homepage() {
+		response = request.get(HOMEPAGE_ENDPOINT);		
+	}
+	
+	@Step
 	public void verify_response_body(String message) {
 		response.then().body(equalTo(message));
 	}
@@ -37,5 +44,10 @@ public class ApiUser {
 	@Step
 	public void verify_status_code(int statusCode) {
 		response.then().statusCode(statusCode);
+	}
+
+	@Step
+	public void verify_response_uaid() {
+		response.then().cookie("uaid");
 	}
 }

@@ -24,5 +24,3 @@ Feature: Sample
 		Given John is viewing the Etsy landing page
 		When he searches for a product from an icon
 		Then the product from the icon should be displayed
-
-		

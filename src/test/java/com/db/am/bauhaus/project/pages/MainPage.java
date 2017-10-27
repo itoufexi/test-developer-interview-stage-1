@@ -14,6 +14,9 @@ public class MainPage extends PageObject {
     @FindBy(css = "[data-palette-listing-image=\"\"]")
     List<WebElementFacade> icons;
 
+    @FindBy(css = "#gnav-account-cart-description")
+    WebElementFacade cart;
+    
     public MainPage(WebDriver driver) {
         super(driver);
     }
@@ -23,5 +26,9 @@ public class MainPage extends PageObject {
 		String title = icon.getAttribute("title");
 		icon.click();
 		return title;
+	}
+
+	public void viewCart() {
+		cart.click();
 	}
 }
