@@ -55,6 +55,11 @@ public class SearchSteps {
     public void search_from_dropdown(String subCategory, String category) {
         user.search_from_dropdown(category, subCategory);
     }
+    
+    @When("^he searches for a product from an icon$")
+    public void search_from_icon() {
+        user.search_from_icon();
+    }
 
     @When("^he searches for a product from the input box \\(screenplay\\)$")
     public void search_from_input_box_screenplay() {
@@ -70,6 +75,11 @@ public class SearchSteps {
     @Then("^the page for '(.*)' should be displayed$")
     public void verify_category_page(String title) {
         user.verify_result_for_title(title);
+    }
+    
+    @Then("^the product from the icon should be displayed$")
+    public void verify_product() {
+        user.verify_product();
     }
 
     @Then("^the result should be displayed \\(screenplay\\)$")
