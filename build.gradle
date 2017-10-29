@@ -32,7 +32,6 @@ dependencies {
     compile 'net.serenity-bdd:serenity-screenplay:' + SERENITY_VERSION
     compile 'net.serenity-bdd:serenity-screenplay-webdriver:' + SERENITY_VERSION
     testCompile 'net.serenity-bdd:serenity-junit:' + SERENITY_VERSION
-    compile 'io.rest-assured:rest-assured:3.0.5'
 }
 
 test {

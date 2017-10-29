@@ -1,8 +1,6 @@
 package com.db.am.bauhaus.project.pages;
 
 import java.util.List;
-import java.util.Random;
-
 import org.openqa.selenium.WebDriver;
 
 import net.serenitybdd.core.annotations.findby.By;
@@ -46,7 +44,7 @@ public class CommonItems extends PageObject {
     		}
     	}
     	if (element==null) {
-    		throw new RuntimeException("aaa");
+    		throw new RuntimeException("Category not found");
     	}
     	else {
     		return element;

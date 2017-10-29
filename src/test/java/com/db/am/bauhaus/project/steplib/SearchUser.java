@@ -57,7 +57,7 @@ public class SearchUser extends ScenarioSteps {
 
     @Step
 	public void verify_product() {
-        assertThat(productPage.getProductName(), containsString(productName));
+        assertThat(productPage.getProductName().replaceAll("\\s+",""), containsString(productName.replaceAll("\\s+","")));
 	}
 
 }

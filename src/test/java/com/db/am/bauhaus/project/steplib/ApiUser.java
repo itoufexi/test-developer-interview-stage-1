@@ -1,53 +1,57 @@
 package com.db.am.bauhaus.project.steplib;
 
-import static io.restassured.RestAssured.given;
+import static net.serenitybdd.rest.SerenityRest.given;
+import static net.serenitybdd.rest.SerenityRest.then;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.startsWith;
 
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import net.thucydides.core.annotations.Step;
 
 public class ApiUser {
 
-    private static final String OPENAPI_ENDPOINT = "https://openapi.etsy.com/v2/listings/active";
+    private static final String ACTIVE_LISTINGS_OPENAPI_ENDPOINT = "https://openapi.etsy.com/v2/listings/active";
 
 	private static final String HOMEPAGE_ENDPOINT = "https://www.etsy.com/";
 	
-	private Response response;
-	private RequestSpecification request;
-	
+	private String endpoint;
+		
 	@Step
-	public void create_a_request() {
-		request = given().when();
+	public void use_active_listings_openapi_endpoint() {
+		endpoint = ACTIVE_LISTINGS_OPENAPI_ENDPOINT;
 	}
 	
 	@Step
-	public void create_a_request_with_an_invalid_api_key(String key) {
-		request = given().queryParam("api_key", key).when();
+	public void call_homepage_endpoint() {
+		endpoint = HOMEPAGE_ENDPOINT;
 	}
 	
 	@Step
-	public void call_openapi_endpoint() {
-		response = request.get(OPENAPI_ENDPOINT);
+	public void call_endpoint() {
+		given().when().get(endpoint);
 	}
 	
 	@Step
-	public void call_homepage() {
-		response = request.get(HOMEPAGE_ENDPOINT);		
+	public void request_an_endpoint_with_an_invalid_api_key(String key) {
+		given().params("api_key", key).when().get(endpoint);
+	}
+	
+	@Step
+	public void use_homepage() {
+		endpoint = HOMEPAGE_ENDPOINT;		
 	}
 	
 	@Step
 	public void verify_response_body(String message) {
-		response.then().body(equalTo(message));
+		then().body(equalTo(message));
 	}
 	
 	@Step
 	public void verify_status_code(int statusCode) {
-		response.then().statusCode(statusCode);
+		then().statusCode(statusCode);
 	}
 
 	@Step
 	public void verify_response_uaid() {
-		response.then().cookie("uaid");
+		then().cookie("uaid", startsWith("uaid"));
 	}
 }

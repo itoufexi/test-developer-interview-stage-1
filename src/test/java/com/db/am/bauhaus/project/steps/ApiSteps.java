@@ -13,31 +13,31 @@ public class ApiSteps {
 
     @Steps
     ApiUser apiUser;
-
-    @Given("an API user uses no API key")
-    public void a_user_uses_no_api_key() {
-    	apiUser.create_a_request();
-    }
     
-    @Given("an API user uses the invalid API key (.*)$")
-    public void a_user_uses_invalid_api_key(String key) {
-        apiUser.create_a_request_with_an_invalid_api_key(key);
-    }
-    
-    @Given("a user visits Etsy for the first time$")
-    public void a_user_visits_first_time() {
-        apiUser.create_a_request();
-    }
-    
-	@When("they call the Etsy openapi endpoint")
+	@Given("an API user calls the active listings Etsy openapi endpoint")
 	public void a_user_calls_the_openapi_endpoint(){
-		apiUser.call_openapi_endpoint();
+		apiUser.use_active_listings_openapi_endpoint();
 	}
 	
-	@When("they browse Etsy")
+	@Given("a user visits Etsy")
 	public void a_user_requests_etsy_homepage(){
-		apiUser.call_homepage();
+		apiUser.use_homepage();
 	}
+	
+    @When("a cookie is not already set")
+    public void a_user_visits_first_time() {
+        apiUser.call_endpoint();
+    }
+	
+    @When("they use no API key")
+    public void a_user_uses_no_api_key() {
+    	apiUser.call_endpoint();
+    }
+    
+    @When("they use the invalid API key (.*)$")
+    public void a_user_uses_invalid_api_key(String key) {
+        apiUser.request_an_endpoint_with_an_invalid_api_key(key);
+    }
 	
 	@Then("the response message is '(.*)'$")
 	public void verify_response_body(String message) {
